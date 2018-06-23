@@ -5,7 +5,9 @@ import {
   View,
   ToolbarAndroid,
   ImageBackground,
-  Image
+  Image,
+  TouchableOpacity,
+  Button
 } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -65,14 +67,24 @@ const styles = StyleSheet.create({
 
 });
 
-export default class App extends React.Component {
-  onActionSelected() {
-    console.log('action', ...arguments);
+export default class HomeScreen extends React.Component {
+  static get navigationOptions() {
+    return {
+      title: 'Welcome'
+    };
+  }
+
+  _navigate() {
+    this.props.navigation.navigate('Weather');
   }
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
-      <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.container}
+        navigation={this.props.navigation}
+        onPress={() => this.props.navigation.navigate('Weather')}>
         <ImageBackground
           style={styles.upperregion}
           source={require('../img/bg-rain.jpeg')}>
@@ -88,7 +100,7 @@ export default class App extends React.Component {
             <Text style={[styles.white, {fontSize: 14}]}>8:40 pm</Text>
           </View>
         </ImageBackground>
-      </View>
+      </TouchableOpacity>
     );
   }
 }
