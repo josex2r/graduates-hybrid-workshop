@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
   },
   description: {
     marginLeft: 'auto',
-    textAlign: 'right',
     alignItems: 'flex-end',
     flexGrow: 1,
     paddingRight: 15
