@@ -5,10 +5,12 @@ import {
   View,
   ToolbarAndroid,
   ImageBackground,
-  Image
+  Image,
+  FlatList
 } from 'react-native';
 import getGeolocation from '../utils/get-geolocation.js';
 import getWeather from '../utils/get-weather.js';
+import cities from '../json/cities';
 
 const styles = StyleSheet.create({
   container: {
@@ -17,6 +19,7 @@ const styles = StyleSheet.create({
   },
   panel: {
     flex: 1,
+    height: 100,
     backgroundColor: '#2196F3'
   },
   title: {
@@ -51,6 +54,13 @@ const styles = StyleSheet.create({
   others: {
     color: '#fff',
     fontSize: 15
+  },
+  cities: {
+    flex: 2
+  },
+  city: {
+    padding: 15,
+    fontSize: 25
   }
 });
 
@@ -102,6 +112,15 @@ export default class WeatherScreen extends React.Component {
               <Text style={styles.others}>Humidity {humidity}%</Text>
             </View>
           </View>
+        </View>
+        <View style={styles.cities}>
+          <FlatList
+            data={cities}
+            renderItem={
+              ({ item }) =>
+                <Text style={styles.city}>{item.name}</Text>
+            }
+          />
         </View>
       </View>
     );
