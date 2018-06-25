@@ -25,7 +25,7 @@ export default async function getGeolocation() {
   const granted = await requestGeolocationPermission();
 
   if (!granted) {
-    return;
+    return Promise.reject();
   }
 
   return new Promise((resolve, reject) => {

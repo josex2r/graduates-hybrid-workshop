@@ -1,6 +1,6 @@
 import React from 'react';
-import HomeScreen from './src/components/HomeScreen';
-import WeatherScreen from './src/components/WeatherScreen';
+import HomeScreen from '../HomeScreen';
+import WeatherScreen from '../WeatherScreen';
 import { createStackNavigator } from 'react-navigation';
 
 if (typeof GLOBAL !== 'undefined') {

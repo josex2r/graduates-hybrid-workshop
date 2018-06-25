@@ -97,7 +97,7 @@ export default class Widget extends React.Component {
     return (
       <View style={styles.panel}>
         <Text>{this.state.loading}</Text>
-        <Text style={styles.title}>{name} ({country})</Text>
+        <Text style={styles.title} numberOfLines={1}>{name} ({country})</Text>
         <View style={styles.weather}>
           <Image
             source={{ uri: image }}
