@@ -6,10 +6,11 @@ import {
   ToolbarAndroid,
   ImageBackground,
   Image,
-  FlatList
+  FlatList,
+  TouchableHighlight
 } from 'react-native';
-import getGeolocation from '../utils/get-geolocation.js';
-import getWeather from '../utils/get-weather.js';
+import getGeolocation from '../utils/get-geolocation';
+import { byCoords, byName } from '../utils/get-weather';
 import cities from '../json/cities';
 
 const styles = StyleSheet.create({
@@ -60,7 +61,8 @@ const styles = StyleSheet.create({
   },
   city: {
     padding: 15,
-    fontSize: 25
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc'
   }
 });
 
@@ -76,14 +78,31 @@ export default class WeatherScreen extends React.Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    getGeolocation().then(({ coords }) => {
-      this.setState(coords);
+  _getWeatherByCoords() {
+    return getGeolocation()
+      .then(({ coords }) => byCoords(coords.latitude, coords.longitude));
+  }
 
-      return getWeather(coords.latitude, coords.longitude);
-    }).then((result) => {
-      this.setState(result);
-    });
+  _getWeatherByName(name) {
+    return byName(name);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const city = nextProps.navigation.getParam('city');
+
+    if (city) {
+      return this.state.name !== city;
+    }
+
+    return true;
+  }
+
+  componentDidMount() {
+    this._getWeatherByCoords().then((result) => this.setState(result));
+  }
+
+  selectCity(city) {
+    this._getWeatherByName(city).then((result) => this.setState(result));
   }
 
   render() {
@@ -118,7 +137,9 @@ export default class WeatherScreen extends React.Component {
             data={cities}
             renderItem={
               ({ item }) =>
-                <Text style={styles.city}>{item.name}</Text>
+                <TouchableHighlight style={styles.city} onPress={this.selectCity.bind(this, item.name)}>
+                  <Text>{item.name}</Text>
+                </TouchableHighlight>
             }
           />
         </View>
