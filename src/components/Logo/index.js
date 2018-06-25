@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class Time extends React.Component {
+export default class Logo extends React.Component {
   render() {
     const logoImage = require('../../img/logo.png');
 
