@@ -6,7 +6,7 @@ import {
 
 const styles = StyleSheet.create({
   time: {
-    color: '#fff',
+    color: '#000',
     fontSize: 14
   }
 });
