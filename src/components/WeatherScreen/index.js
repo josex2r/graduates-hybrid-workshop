@@ -9,9 +9,9 @@ import {
   FlatList,
   TouchableHighlight
 } from 'react-native';
-import getGeolocation from '../utils/get-geolocation';
-import { byCoords, byName } from '../utils/get-weather';
-import cities from '../json/cities';
+import getGeolocation from '../../utils/get-geolocation';
+import { byCoords, byName } from '../../utils/get-weather';
+import cities from '../../json/cities';
 
 const styles = StyleSheet.create({
   container: {
